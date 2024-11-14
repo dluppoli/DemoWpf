@@ -17,7 +17,7 @@ namespace DemoWpf.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Athlete()
         {
-            this.Partecipations = new HashSet<Partecipation>();
+            
         }
     
         public int IdAthlete { get; set; }
@@ -26,7 +26,5 @@ namespace DemoWpf.Models
         public Nullable<short> Height { get; set; }
         public Nullable<short> Weight { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Partecipation> Partecipations { get; set; }
     }
 }

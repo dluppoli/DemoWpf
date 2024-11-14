@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,20 +57,46 @@ namespace DemoWpf.ViewModels
                 PrimoAtleta = await context.Athletes.FirstOrDefaultAsync();
             }
         }
-        public void getAtletaRandom()
+        public async Task getAtletaRandom()
         {
             //Esercizio rendere il metodo aincrono con ContinueWith
             using(var context = new OlympicsContext())
             {
-                int atleti = context.Athletes.Count();
+                int atleti = await context.Athletes.CountAsync();
                 Random rnd = new Random();
                 while (true)
                 {
                     int idAthlete = rnd.Next(atleti);
-                    AtletaRandom = context.Athletes.FirstOrDefault(q=> q.IdAthlete == idAthlete);
+                    AtletaRandom = await context.Athletes.FirstOrDefaultAsync(q=> q.IdAthlete == idAthlete);
                     if (AtletaRandom != null) return;
                 }
             }
+
+            
+            /*Task.Run(() =>
+            {
+                using (var context = new OlympicsContext())
+                {
+                    return context.Athletes.Count();
+                }
+            }).ContinueWith(t =>
+            {
+                using (var context = new OlympicsContext())
+                {
+                    Random rnd = new Random();
+                    while (true)
+                    {
+                        int idAthlete = rnd.Next(t.Result);
+                        AtletaRandom = context.Athletes.FirstOrDefault(q => q.IdAthlete == idAthlete);
+                        if (AtletaRandom != null) return;
+                    }
+                }
+            });*/
+            
+        }
+        public Task getNumeriPrimiAsync(int n)
+        {
+            return Task.Run(() => getNumeriPrimi(n));
         }
 
         public void getNumeriPrimi(int n)
@@ -80,11 +107,11 @@ namespace DemoWpf.ViewModels
             for (int i = 2; i<numeri.Length; i++)
                 numeri[i] = true;
 
-            for (int i = 2; i<=Math.Sqrt(n); i++)
+            Parallel.For(2, (int)Math.Sqrt(n) + 1, i =>
             {
                 for (int j = i * 2; j <= n; j += i)
                     numeri[j] = false;
-            }
+            });
 
             NumeriPrimi = numeri.Count(c => c == true);
         }

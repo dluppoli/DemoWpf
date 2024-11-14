@@ -26,8 +26,5 @@ namespace DemoWpf.Models
         }
     
         public virtual DbSet<Athlete> Athletes { get; set; }
-        public virtual DbSet<Event> Events { get; set; }
-        public virtual DbSet<Game> Games { get; set; }
-        public virtual DbSet<Partecipation> Partecipations { get; set; }
     }
 }

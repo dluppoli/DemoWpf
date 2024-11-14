@@ -40,6 +40,8 @@ namespace DemoWpf
 
         private void NumeriPrimi_Click(object sender, RoutedEventArgs e)
         {
+            //vm.getNumeriPrimi(50_000_000);
+            vm.getNumeriPrimiAsync(50_000_000);
         }
     }
 }

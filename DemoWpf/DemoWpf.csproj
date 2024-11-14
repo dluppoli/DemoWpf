@@ -76,12 +76,6 @@
     <Compile Include="Models\Athlete.cs">
       <DependentUpon>Olympics.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Event.cs">
-      <DependentUpon>Olympics.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Game.cs">
-      <DependentUpon>Olympics.tt</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -102,9 +96,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Olympics.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Partecipation.cs">
-      <DependentUpon>Olympics.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
